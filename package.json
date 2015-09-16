@@ -1,0 +1,28 @@
+{
+  "name": "fly-typescript",
+  "version": "0.1.0",
+  "description": "Typescript plugin for Fly",
+  "license": "MIT",
+  "repository": "https://github.com/iiegor/fly-typescript",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "git push origin master && npm publish"
+  },
+  "author": {
+    "name": "Iegor Azuaga",
+    "email": "dextrackmedia@gmail.com"
+  },
+  "dependencies": {
+    "object-assign": "^4.0.1",
+    "typescript": "^1.5.3"
+  },
+  "engines": {
+    "iojs": ">= 1.0.0",
+    "node": ">= 0.11.0"
+  },
+  "keywords": [
+    "fly",
+    "fly-plugin",
+    "eslint"
+  ]
+}
