@@ -17,11 +17,10 @@
     "typescript": "^1.5.3"
   },
   "devDependencies": {
-    "fly": "^0.8.3",
+    "fly": "2.0.0-beta",
     "fly-typescript": "./"
   },
   "engines": {
-    "iojs": ">= 1.0.0",
     "node": ">= 0.11.0"
   },
   "keywords": [
