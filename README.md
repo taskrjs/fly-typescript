@@ -22,7 +22,7 @@ npm install -D fly-typescript
 
 ### Example
 
-Check [flyfile.js](https://github.com/kashiro/fly-typescript/blob/master/flyfile.js) and [test](https://github.com/iiegor/fly-typescript/blob/master/test) directory :)
+Check [flyfile.js](https://github.com/iiegor/fly-typescript/blob/master/flyfile.js) and [test](https://github.com/iiegor/fly-typescript/blob/master/test) directory :)
 
 ```js
 export default function* () {
