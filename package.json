@@ -13,7 +13,6 @@
     "email": "dextrackmedia@gmail.com"
   },
   "dependencies": {
-    "object-assign": "^4.0.1",
     "typescript": "^2.2.1"
   },
   "devDependencies": {
