@@ -20,7 +20,7 @@
     "fly": "2.0.0-beta"
   },
   "engines": {
-    "node": ">= 0.11.0"
+    "node": ">= 4.6"
   },
   "keywords": [
     "fly",
