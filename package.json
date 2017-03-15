@@ -6,7 +6,7 @@
   "repository": "https://github.com/iiegor/fly-typescript",
   "main": "index.js",
   "scripts": {
-    "deploy": "git push origin master && npm publish"
+    "test": "tape test/*.js | tap-spec"
   },
   "author": {
     "name": "Iegor Azuaga",
@@ -16,7 +16,10 @@
     "typescript": "^2.2.1"
   },
   "devDependencies": {
-    "fly": "^2.0.5"
+    "fly": "^2.0.5",
+    "fly-clear": "^1.0.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
   },
   "engines": {
     "node": ">= 4.6"
