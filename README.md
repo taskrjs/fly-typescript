@@ -10,7 +10,6 @@ npm install fly-typescript --save-dev
 
 ## Usage
 
-
 ```js
 exports.scripts = function * (fly) {
   yield fly.source('src/**/*.ts').typescript({
@@ -54,10 +53,9 @@ Notice that `compilerOptions` is no longer defined, and instead, its children (`
 
 > **Note:** The first example (aka, using `compilerOptions`) will still work.
 
-
 ## License
 
-MIT © Iegor Azuaga
+MIT © FlyJS
 
-[travis-link]:  https://travis-ci.org/lukeed/fly-typescript
-[travis-badge]: http://img.shields.io/travis/lukeed/fly-typescript.svg?style=flat-square
+[travis-link]:  https://travis-ci.org/flyjs/fly-typescript
+[travis-badge]: http://img.shields.io/travis/flyjs/fly-typescript.svg?style=flat-square

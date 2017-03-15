@@ -3,20 +3,20 @@
   "version": "0.1.2",
   "description": "Typescript plugin for Fly",
   "license": "MIT",
-  "repository": "https://github.com/iiegor/fly-typescript",
+  "repository": "https://github.com/flyjs/fly-typescript",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js | tap-spec"
   },
   "author": {
-    "name": "Iegor Azuaga",
-    "email": "dextrackmedia@gmail.com"
+    "name": "Luke Edwards",
+    "email": "luke@lukeed.com",
+    "url": "https://lukeed.com"
   },
   "contributors": [
     {
-      "name": "Luke Edwards",
-      "email": "luke@lukeed.com",
-      "url": "https://lukeed.com"
+      "name": "Iegor Azuaga",
+      "email": "dextrackmedia@gmail.com"
     }
   ],
   "dependencies": {
