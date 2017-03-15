@@ -12,6 +12,13 @@
     "name": "Iegor Azuaga",
     "email": "dextrackmedia@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Luke Edwards",
+      "email": "luke@lukeed.com",
+      "url": "https://lukeed.com"
+    }
+  ],
   "dependencies": {
     "typescript": "^2.2.1"
   },

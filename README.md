@@ -1,54 +1,63 @@
-<div align="center">
-  <a href="http://github.com/flyjs/fly">
-    <img width=200px  src="https://cloud.githubusercontent.com/assets/8317250/8733685/0be81080-2c40-11e5-98d2-c634f076ccd7.png">
-  </a>
-</div>
+# fly-typescript [![][travis-badge]][travis-link]
 
-> [typescript](https://github.com/Microsoft/TypeScript) plugin for _[Fly][fly]_.
+> [Typescript](https://github.com/Microsoft/TypeScript) plugin for Fly
 
-[![][fly-badge]][fly]
-[![npm package][npm-ver-link]][releases]
-[![][dl-badge]][npm-pkg-link]
-[![][mit-badge]][mit]
-
-## Usage
-> Check out the [documentation](https://github.com/Microsoft/TypeScript) to see the available options.
-
-### Install
+## Install
 
 ```a
-npm install -D fly-typescript
+npm install fly-typescript --save-dev
 ```
 
-### Example
+## Usage
 
-Check [flyfile.js](https://github.com/iiegor/fly-typescript/blob/master/flyfile.js) and [test](https://github.com/iiegor/fly-typescript/blob/master/test) directory :)
 
 ```js
-export default function* () {
-  yield this.clear("test/app.js")
-  yield this
-    .source("test/src/app.ts")
-    .typescript({
-      removeComments: true,
-      preserveConstEnums: true,
-      experimentalDecorators: true
-    })
-    .target("test")
+exports.scripts = function * (fly) {
+  yield fly.source('src/**/*.ts').typescript({
+    jsx: 'React',
+    target: 'ES5',
+    sourceMap: true,
+    removeComments: true
+  }).target('dist/js');
 }
 ```
 
-# License
+## API
 
-[MIT][mit] © Iegor Azuaga
+### .typescript(options)
+
+Unlike most plugins, this plugin provides access to all of Typescript's [Transpile options](https://github.com/Microsoft/TypeScript/blob/master/src/services/transpile.ts#L2-L8). However, _for the sake of simplicity_, this plugin **flattens** all `compilerOptions` keys into the same object. In other words, we **assume** that you're providing `compilerOptions`, unless the given key matches the name of another `TranspileOption`.
+
+> Check out Typescript's [Compile Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to see all Compiler options.
+
+For example:
+
+```js
+fly.source('...').typescript({ 
+  moduleName: 'FooBar',
+  compilerOptions: {
+    module: 'System',
+    sourceMap: true
+  }
+}).target('...');
+
+// can be written as:
+
+fly.source('...').typescript({ 
+  moduleName: 'FooBar',
+  module: 'System',
+  sourceMap: true
+}).target('...');
+```
+
+Notice that `compilerOptions` is no longer defined, and instead, its children (`module`, `sourceMap`, etc) are defined _alongside_ `moduleName`!
+
+> **Note:** The first example (aka, using `compilerOptions`) will still work.
 
 
-[mit]:          http://opensource.org/licenses/MIT
-[contributors]: https://github.com/iiegor/fly-typescript/graphs/contributors
-[releases]:     https://github.com/iiegor/fly-typescript/releases
-[fly]:          https://www.github.com/flyjs/fly
-[fly-badge]:    https://img.shields.io/badge/fly-JS-05B3E1.svg?style=flat-square
-[mit-badge]:    https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
-[npm-pkg-link]: https://www.npmjs.org/package/fly-typescript
-[npm-ver-link]: https://img.shields.io/npm/v/fly-typescript.svg?style=flat-square
-[dl-badge]:     http://img.shields.io/npm/dm/fly-typescript.svg?style=flat-square
+## License
+
+MIT © Iegor Azuaga
+
+[travis-link]:  https://travis-ci.org/lukeed/fly-typescript
+[travis-badge]: http://img.shields.io/travis/lukeed/fly-typescript.svg?style=flat-square
