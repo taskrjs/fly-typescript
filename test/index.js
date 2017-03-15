@@ -6,7 +6,7 @@ const dir = join(__dirname, 'fixtures');
 const tmp = join(__dirname, '.tmp');
 
 test('fly-typescript', t => {
-  t.plan(9);
+  t.plan(13);
 
   const fly = new Fly({
     plugins: [
@@ -42,7 +42,19 @@ test('fly-typescript', t => {
         t.equal(arr.length, 2, 'creates 2 files');
         const str = yield f.$.read(`${tmp}/app.js`, 'utf8');
         t.ok(/sourceMappingURL/.test(str), 'via `sourceMap`; append `sourceMappingURL` comment');
-        // t.ok(/app.js.map/.test(str), 'via `sourceMap`; embed link to external sourcemap');
+        t.ok(/app.js.map/.test(str), 'via `sourceMap`; embed link to external sourcemap');
+        yield f.clear(tmp);
+      },
+      *e(f) {
+        yield f.source(`${dir}/*.ts`).typescript({
+          moduleName: 'FooBar',
+          module: 'System',
+          target: 'ES2015'
+        }).target(tmp);
+        const str = yield f.$.read(`${tmp}/app.js`, 'utf8');
+        t.ok(/FooBar/.test(str), 'listen to `moduleName` option');
+        t.ok(/System.register/.test(str), 'listen to `compilerOptions.module` option');
+        t.ok(/App = class App/.test(str), 'listen to `compilerOptions.target` option');
         yield f.clear(tmp);
       }
     }
@@ -50,5 +62,5 @@ test('fly-typescript', t => {
 
   t.ok('typescript' in fly.plugins, 'add the `typescript` plugin');
 
-  fly.serial(['a', 'b', 'c', 'd']);
+  fly.serial(['a', 'b', 'c', 'd', 'e']);
 });
