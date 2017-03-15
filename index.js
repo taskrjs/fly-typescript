@@ -1,28 +1,40 @@
-const ts = require('typescript')
-const extname = require('path').extname
+const ts = require('typescript');
+const extname = require('path').extname;
 
 module.exports = function (fly) {
-  fly.plugin('typescript', {every: true}, function * (file, opts) {
-    const compilerOptions = Object.assign({sourceMap: false, outFile: file.base}, opts)
+  fly.plugin('typescript', {every: true}, function * (file, options) {
+    options = options || {};
+    const opts = {fileName: file.base};
+
+    // "steal" transpiler options from `options`
+    if (options.moduleName) {
+      opts.moduleName = options.moduleName;
+    }
+
+    if (options.renamedDependencies) {
+      opts.renamedDependencies = options.renamedDependencies;
+    }
+
+    // everything else is `compilerOptions`
+    opts.compilerOptions = options;
 
     // modify extension
-    const ext = extname(file.base)
-    file.base = file.base.replace(new RegExp(ext, 'i'), '.js')
+    const ext = extname(file.base);
+    file.base = file.base.replace(new RegExp(ext, 'i'), '.js');
 
     // compile output
-    const result = ts.transpileModule(file.data.toString(), {compilerOptions})
+    const result = ts.transpileModule(file.data.toString(), opts);
 
-    if (opts.sourceMap && result.sourceMapText) {
+    if (opts.compilerOptions.sourceMap && result.sourceMapText) {
       // add sourcemap to `files` array
       this._.files.push({
         dir: file.dir,
         base: `${file.base}.map`,
         data: new Buffer(JSON.stringify(result.sourceMapText))
-      })
+      });
     }
 
     // update file's data
-    file.data = new Buffer(result.outputText)
-  })
+    file.data = new Buffer(result.outputText);
+  });
 }
-
