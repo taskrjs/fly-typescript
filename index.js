@@ -16,7 +16,7 @@ module.exports = function (fly) {
     }
 
     // everything else is `compilerOptions`
-    opts.compilerOptions = options;
+    opts.compilerOptions = options.compilerOptions || options;
 
     // modify extension
     const ext = extname(file.base);
