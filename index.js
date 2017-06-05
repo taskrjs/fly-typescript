@@ -19,8 +19,8 @@ module.exports = function (fly) {
     opts.compilerOptions = options.compilerOptions || options;
 
     // modify extension
-    const ext = extname(file.base);
-    file.base = file.base.replace(new RegExp(ext, 'i'), '.js');
+    const ext = new RegExp(extname(file.base).replace('.', '\\.') + '$', 'i');
+    file.base = file.base.replace(ext, '.js');
 
     // compile output
     const result = ts.transpileModule(file.data.toString(), opts);
